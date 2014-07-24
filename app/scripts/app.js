@@ -30,8 +30,8 @@ scApp.config(function ($routeProvider) {
 scApp.factory('scData', function($q) {
     var deferred = $q.defer();
     SC.initialize({
-        client_id: 'JD7CspfLkMrqYQ9cNVXDLQ',
-        redirect_uri: 'http://localhost:9000/callback.html'
+        client_id: '###',
+        redirect_uri: 'http://soundcloud.dev/soundcloud.html'
     });
 
     SC.get('/users/kavverhouzer', function(data) {
@@ -43,13 +43,13 @@ scApp.factory('scData', function($q) {
 function getLatestTracks(username,offset,daysOld, tracksPerArtist){
         $.ajax({
           type: "GET",
-          url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=200&offset=" + offset,
+          url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=###&limit=200&offset=" + offset,
           success: function(data){
             for(j in data){
               user = data[j]['permalink'];
               $.ajax({
                 type: "GET",
-                url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=" + tracksPerArtist,
+                url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=###&limit=" + tracksPerArtist,
                 success: function(data2){
                   if(jQuery.isEmptyObject(data2)===false){
                     for(k in data2){
