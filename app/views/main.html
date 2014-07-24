@@ -1,0 +1,59 @@
+<div class="row details">
+  <form class="form-horizontal">
+    <fieldset>
+    <!-- Form Name -->
+    <legend>Details: </legend>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="txt_username">SoundCloud Username</label>
+      <div class="controls">
+      <input id="txt_username" name="txt_username" type="text" placeholder="" class="input-medium" required="">
+
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="control-group">
+      <label class="control-label" for="daysOld">Max Days Old</label>
+      <div class="controls">
+      <select id="daysOld" name="daysOld" class="input-mini">
+        <option>1</option>
+        <option>3</option>
+        <option>5</option>
+        <option>7</option>
+        <option>10</option>
+        <option>14</option>
+        <option>28</option>
+      </select>
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="control-group">
+      <label class="control-label" for="tracksPerArtist">Max Tracks Per Artist</label>
+      <div class="controls">
+      <select id="tracksPerArtist" name="tracksPerArtist" class="input-mini">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="control-group">
+      <label class="control-label" for="complete"></label>
+      <div class="controls">
+      <button id="complete" name="complete" class="btn btn-primary" type="button">Get me the FRESH S#IT!</button>
+      </div>
+    </div>
+
+    </fieldset>
+  </form>
+</div>
+<div class="row" id="results">
+  <a ng-click="test()" href="#">ahhhhhhhh</a>
+</div>
