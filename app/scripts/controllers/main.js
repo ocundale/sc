@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the soondcloodApp
  */
-scApp.controller('MainCtrl', function ($scope, scData) {
+scApp.controller('MainCtrl', function ($scope, SoundService) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -25,8 +25,20 @@ scApp.controller('MainCtrl', function ($scope, scData) {
     //     $scope.status = status;
     // });
     };
+
     $scope.test = function() {
         console.log(scData);
         return $scope.test = 'isLoggedIn';
     };
+    //scDetails:
+    // username
+    // tracksPerArtist
+    // daysOld
+    $scope.showTracks = function () {
+        SoundService.getTracks($scope.scDetails);
+
+        // $scope.scDetails = {};
+
+    }
+
 });

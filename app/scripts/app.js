@@ -27,14 +27,28 @@ scApp.config(function ($routeProvider) {
     });
 });
 
+scApp.service('SoundService', function () {
+
+    //save method create a new contact if not already exists
+    //else update the existing object
+    this.getTracks = function (scDetails) {
+        if (scDetails.username == null) {
+        } else {
+            //for existing contact, find this contact using id
+            //and update it.
+        }
+        return scDetails;
+    }
+});
+
 scApp.factory('scData', function($q) {
     var deferred = $q.defer();
     SC.initialize({
-        client_id: '###',
+        client_id: 'JD7CspfLkMrqYQ9cNVXDLQ',
         redirect_uri: 'http://soundcloud.dev/soundcloud.html'
     });
 
-    SC.get('/users/kavverhouzer', function(data) {
+    SC.get('/users/phytone', function(data) {
        deferred.resolve( data);
     });
     return deferred.promise;
@@ -43,13 +57,13 @@ scApp.factory('scData', function($q) {
 function getLatestTracks(username,offset,daysOld, tracksPerArtist){
         $.ajax({
           type: "GET",
-          url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=###&limit=200&offset=" + offset,
+          url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=200&offset=" + offset,
           success: function(data){
             for(j in data){
               user = data[j]['permalink'];
               $.ajax({
                 type: "GET",
-                url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=###&limit=" + tracksPerArtist,
+                url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=" + tracksPerArtist,
                 success: function(data2){
                   if(jQuery.isEmptyObject(data2)===false){
                     for(k in data2){
