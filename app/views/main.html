@@ -8,7 +8,7 @@
     <div class="control-group">
       <label class="control-label" for="txt_username">SoundCloud Username</label>
       <div class="controls">
-      <input id="txt_username" ng-model="scDetails.username" name="txt_username" type="text" placeholder="" class="input-medium" required="">
+      <input id="txt_username" ng-model="scDetails.username" name="txt_username" type="text" value="phytone" class="input-medium">
 
       </div>
     </div>
@@ -18,7 +18,7 @@
       <label class="control-label" for="daysOld">Max Days Old</label>
       <div class="controls">
       <select id="daysOld" name="daysOld" ng-model="scDetails.daysOld" class="input-mini">
-        <option>1</option>
+        <option value="1" selected="selected">1</option>
         <option>3</option>
         <option>5</option>
         <option>7</option>
@@ -34,7 +34,7 @@
       <label class="control-label" for="tracksPerArtist">Max Tracks Per Artist</label>
       <div class="controls">
       <select id="tracksPerArtist" name="tracksPerArtist" ng-model="scDetails.tracksPerArtist" class="input-mini">
-        <option>1</option>
+        <option value="1" selected="selected">1</option>
         <option>2</option>
         <option>3</option>
         <option>4</option>
@@ -47,7 +47,7 @@
     <div class="control-group">
       <label class="control-label" for="complete"></label>
       <div class="controls">
-      <button id="complete" name="complete" class="btn btn-primary" ng-click="showTracks(scDetails)" type="button">Get me the FRESH S#IT!</button>
+      <button id="complete" name="complete" class="btn btn-primary" ng-click="getData(scDetails)" type="button">Get me the FRESH S#IT!</button>
       </div>
     </div>
 
@@ -55,4 +55,5 @@
   </form>
 </div>
 <div class="row" id="results">
+<p>{{newData}}</p>
 </div>
