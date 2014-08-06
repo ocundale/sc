@@ -27,57 +27,97 @@ scApp.config(function ($routeProvider) {
     });
 });
 
-scApp.service('SoundService', function () {
 
-    //save method create a new contact if not already exists
-    //else update the existing object
-    this.getTracks = function (scDetails) {
-        if (scDetails.username == null) {
-        } else {
-          for (var i = 4; i >= 0; i--) {
-            var offset = i * 200; //Offset to allow up to 800 artists on search
-            getLatestTracks(scDetails.username, offset, scDetails.daysOld, scDetails.tracksPerArtist);
-          };
-
-        }
-        return scDetails;
-    },
-
-    this.getLatestTracks = function(user,offset,daysOld,tracksPerArtist) {
-      console.log(user,offset,daysOld,tracksPerArtist);
+scApp.service('DataService', function($http) {
+  return {
+    getData:function(user,offset,days,tracks) {
+      var results;
+      return $http({ method: 'GET', url: 'http://api.soundcloud.com/users/' + 'deepervibrations' + '/tracks.json?client_id=XXXX&limit='+'3' })
+        .success(function(data) {
+          // data.forEach(function(entry) {
+          //     results.push({
+          //         "title" : entry.title,
+          //         "permalink": entry.permalink,
+          //         "genre": entry.genre
+          //     });
+          //     results.push(entry);
+          //   });
+          // console.log('re1;',results);
+          // console.log('re;',results[0]);
+          }).
+          error(function() {
+              results = 'NO TRACKS!';
+          });
+          return results;
+          // return deferred.promise.then(function(data){ //Do stuff with data.
+          //   console.log('we-re in', data);
+          // });
+      }
     }
+
+    // this.scAccountLogin = function(user) {
+    //   var deferred = $q.defer();
+    //   SC.initialize({
+    //       client_id: 'XXXX',
+    //       redirect_uri: 'http://soundcloud.dev/soundcloud.html'
+    //   });
+
+    //   SC.get('/users/' + user, function(data) {
+    //      deferred.resolve(data);
+    //   });
+    //   // return {
+    //   //   showTracks: function(scDetails) {
+    //   //     return scDetails + 'asd';
+    //   //   }
+    //   // }
+    //   return deferred.promise.then(function(data){ //Do stuff with data.
+    //     console.log('we-re in', data);
+    //   });
+    // };
 });
 
-scApp.factory('scData', function($q) {
-    var deferred = $q.defer();
-    SC.initialize({
-        client_id: 'JD7CspfLkMrqYQ9cNVXDLQ',
-        redirect_uri: 'http://soundcloud.dev/soundcloud.html'
-    });
+scApp.service('SoundService', function (TrackService) {
+  //save method create a new contact if not already exists
+  //else update the existing object
 
-    SC.get('/users/phytone', function(data) {
-       deferred.resolve(data);
-    });
-    // return {
-    //   showTracks: function(scDetails) {
-    //     return scDetails + 'asd';
-    //   }
-    // }
-    return deferred.promise.then(function(data){ //Do stuff with data.
-      console.log(data);
-    });
+  this.displayTracks = function(scDetails) {
+    var results = TrackService.getTracks(scDetails);
+    return results;
+  };
+});
+
+scApp.service('TrackService', function (DataService) {
+    //save method create a new contact if not already exists
+    //else update the existing object
+
+  this.getTracks = function(scDetails) {
+    var user = scDetails.username || 'phytone',
+        offset = scDetails.offset || '1',
+        days = scDetails.daysOld || '1',
+        tracks = scDetails.tracksPerArtist || '1';
+    if (user == null) {
+      alert('no username');
+    } else {
+      console.log('datatime!');
+      for (var i = 4; i >= 0; i--) {
+        var offset = i * 200; //Offset to allow up to 800 artists on search
+        var results = DataService.getData(user,offset,days,tracks); //scDetails.username, offset,
+        return results;
+      }
+    }
+  };
 });
 
 // function getLatestTracks(username,offset,daysOld, tracksPerArtist){
 //         $.ajax({
 //           type: "GET",
-//           url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=200&offset=" + offset,
+//           url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=XXXX&limit=200&offset=" + offset,
 //           success: function(data){
 //             for(j in data){
 //               user = data[j]['permalink'];
 //               $.ajax({
 //                 type: "GET",
-//                 url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=" + tracksPerArtist,
+//                 url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=XXXX&limit=" + tracksPerArtist,
 //                 success: function(data2){
 //                   if(jQuery.isEmptyObject(data2)===false){
 //                     for(k in data2){

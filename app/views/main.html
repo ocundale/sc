@@ -47,13 +47,21 @@
     <div class="control-group">
       <label class="control-label" for="complete"></label>
       <div class="controls">
-      <button id="complete" name="complete" class="btn btn-primary" ng-click="getData(scDetails)" type="button">Get me the FRESH S#IT!</button>
+      <button id="complete" name="complete" class="btn btn-primary" ng-click="findTracks(scDetails)" type="button">Get me the FRESH S#IT!</button>
       </div>
     </div>
 
     </fieldset>
   </form>
 </div>
-<div class="row" id="results">
-<p>{{newData}}</p>
-</div>
+<ul class="row" ng-model="results">
+     <li class="animate-repeat" ng-repeat="result in results">
+    {{result}}
+       <!-- {{$index + 1}} ID: {{result.id}}
+       <iframe width="50%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{result[0].id}}&amp;auto_play=true&amp;hide_related=true&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true">{{result.data[0].id}}</iframe> -->
+     </li>
+     <li class="animate-repeat" ng-if="results.length == 0">
+       <strong>No results found...</strong>
+     </li>
+
+</ul>

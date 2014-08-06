@@ -7,22 +7,24 @@
  * # MainCtrl
  * Controller of the soondcloodApp
  */
-scApp.controller('MainCtrl', function ($scope, SoundService, scData) {
+scApp.controller('MainCtrl', function ($scope, SoundService) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    $scope.getData = function () {
-        $scope.newData = scData($scope.scDetails);
-        console.log(newData);
+    // $scope.getData = function () {
+    //     $scope.newData = DataService($scope.scDetails);
+    //     console.log(newData);
 
-    };
+    // };
+    $scope.findTracks = function() {
+        SoundService.displayTracks($scope.scDetails)
+            .then(function success(results){
+                $scope.results = results;
+        });
 
-    $scope.test = function() {
-        console.log(scData);
-        return $scope.test = 'isLoggedIn';
-    };
+    }
 
     //scDetails:
     // username
@@ -30,9 +32,7 @@ scApp.controller('MainCtrl', function ($scope, SoundService, scData) {
     // daysOld
     $scope.showTracks = function () {
         SoundService.getTracks($scope.scDetails);
-
         // $scope.scDetails = {};
-
     }
 
 });
