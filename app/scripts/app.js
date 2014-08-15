@@ -32,16 +32,19 @@ scApp.service('DataService', function($http) {
   return {
     getData:function(user,offset,days,tracks) {
       var results;
-      return $http({ method: 'GET', url: 'http://api.soundcloud.com/users/' + 'deepervibrations' + '/tracks.json?client_id=XXXX&limit='+'3' })
+      return $http({ method: 'GET', url: 'http://api.soundcloud.com/users/' + 'deepervibrations' + '/tracks.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit='+'3' })
         .success(function(data) {
-          // data.forEach(function(entry) {
+          data.forEach(function(track) {
+          console.log(track.id);
+          // results = '<iframe width="50%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.id + '"&amp;auto_play=true&amp;hide_related=true&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>';
           //     results.push({
           //         "title" : entry.title,
           //         "permalink": entry.permalink,
           //         "genre": entry.genre
           //     });
           //     results.push(entry);
-          //   });
+            return results;
+            });
           // console.log('re1;',results);
           // console.log('re;',results[0]);
           }).
@@ -58,8 +61,11 @@ scApp.service('DataService', function($http) {
     // this.scAccountLogin = function(user) {
     //   var deferred = $q.defer();
     //   SC.initialize({
-    //       client_id: 'XXXX',
-    //       redirect_uri: 'http://soundcloud.dev/soundcloud.html'
+    //       client_id: 'JD7CspfLkMrqYQ9cNVXDLQ',
+
+    redirect_uri: 'http://soundcloud.dev/soundcloud.html'
+
+
     //   });
 
     //   SC.get('/users/' + user, function(data) {
@@ -107,17 +113,26 @@ scApp.service('TrackService', function (DataService) {
     }
   };
 });
+scApp.directive('scembed', function () {
+   return {
+     restrict: 'E',
+     replace: true,
+     template: '<iframe width="100%" height="20" scrolling="no" frameborder="no"></iframe>'
+     // link: function (scope, element, attributes) {
 
+     // }
+   };
+});
 // function getLatestTracks(username,offset,daysOld, tracksPerArtist){
 //         $.ajax({
 //           type: "GET",
-//           url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=XXXX&limit=200&offset=" + offset,
+//           url: "http://api.soundcloud.com/users/" + username + "/followings.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=200&offset=" + offset,
 //           success: function(data){
 //             for(j in data){
 //               user = data[j]['permalink'];
 //               $.ajax({
 //                 type: "GET",
-//                 url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=XXXX&limit=" + tracksPerArtist,
+//                 url: "http://api.soundcloud.com/users/" + user +" /tracks.json?client_id=JD7CspfLkMrqYQ9cNVXDLQ&limit=" + tracksPerArtist,
 //                 success: function(data2){
 //                   if(jQuery.isEmptyObject(data2)===false){
 //                     for(k in data2){
