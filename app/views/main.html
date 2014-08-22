@@ -1,5 +1,5 @@
 <div class="row details">
-  <form class="form-horizontal">
+  <form class="form-horizontal" form ng-submit="search()">
     <fieldset>
     <!-- Form Name -->
     <legend>Details: </legend>
@@ -47,20 +47,33 @@
     <div class="control-group">
       <label class="control-label" for="complete"></label>
       <div class="controls">
-      <button id="complete" name="complete" class="btn btn-primary" ng-click="findTracks(scDetails)" type="button">Get me the FRESH S#IT!</button>
+      <button ng-model="scDetails" id="complete" name="complete" class="btn btn-primary" ng-click="search(scDetails)" type="button">Get me the FRESH S#IT!</button>
       </div>
     </div>
 
     </fieldset>
   </form>
 </div>
-<ul class="row" ng-model="results">
-     <li class="animate-repeat" ng-repeat="result in results.data">
-      <img src="{{result.artwork_url}}" width="100" height="100"/>
-       <scembed src="{{result.src}}"></scembed>
-     </li>
-     <li class="animate-repeat" ng-if="results.length == 0">
-       <strong>No results found...</strong>
+
+<ul class="row" ng-if="tracks.length" ng-model="tracks">
+    <li class="col-xs-6 animate-repeat" ng-repeat="track in tracks">
+      <div class="media well">
+        <a class="pull-left" href="#">
+          <img class="media-object" src="{{track.artwork_url}}" alt="">
+        </a>
+        <div class="media-body">{{loading}}
+          <h4 class="media-heading">{{track.title | limitTo:30}}</h4>
+          <p>{{track.description | limitTo:100}}</p>
+          <p ng-show="{{track.downloadable}}">
+            <span class="glyphicon glyphicon-download"></span>
+            <a href="{{track.id}}" target="_blank" > Download Available</a>
+          </p>
+        </div><p id="divFrameHolder" >asdasd</p>
+        <scembed src="{{track.src}}"></scembed>
+      </div>
+    </li>
+
+     <li class="animate-repeat" ng-if="tracks.length == 0" ng-hide="json">
+       <strong>No tracks found...</strong>
      </li>
 </ul>
-<p>{{tes}}</p>

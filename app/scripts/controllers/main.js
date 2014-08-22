@@ -20,12 +20,11 @@ scApp.controller('MainCtrl', function ($scope, SoundService, $sce) {
     // };
     $scope.findTracks = function() {
         SoundService.displayTracks($scope.scDetails)
-
         .then(function success(results){
             results.data.forEach(function(result) {
                 result.src = $sce.trustAsResourceUrl('https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + result.id + '&amp;auto_play=false&amp;color=ff5500&amp;inverse=false&amp;show_user=true');
             });
-            console.log(results);
+            console.log('findtrks',results);
             $scope.results = results;
         });
     }
