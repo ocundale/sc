@@ -54,7 +54,7 @@
     </fieldset>
   </form>
 </div>
-
+<p>{{loading}}</p>
 <ul class="row" ng-if="tracks.length" ng-model="tracks">
     <li class="col-xs-6 animate-repeat" ng-repeat="track in tracks">
       <div class="media well">
@@ -63,12 +63,12 @@
         </a>
         <div class="media-body">{{loading}}
           <h4 class="media-heading">{{track.title | limitTo:30}}</h4>
-          <p>{{track.description | limitTo:100}}</p>
+          <p class="description">{{track.description | limitTo:100}}</p>
           <p ng-show="{{track.downloadable}}">
             <span class="glyphicon glyphicon-download"></span>
             <a href="{{track.id}}" target="_blank" > Download Available</a>
           </p>
-        </div><p id="divFrameHolder" >asdasd</p>
+        </div>
         <scembed src="{{track.src}}"></scembed>
       </div>
     </li>
