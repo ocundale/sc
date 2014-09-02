@@ -1,14 +1,14 @@
 <div class="row details">
-  <form class="form-horizontal" form ng-submit="search()">
+  <form class="form-horizontal sc-params" form ng-submit="search()">
     <fieldset>
     <!-- Form Name -->
-    <legend>Details: </legend>
+    <!-- <legend>Details: </legend> -->
 
     <!-- Text input-->
     <div class="control-group">
       <label class="control-label" for="txt_username">SoundCloud Username</label>
       <div class="controls">
-      <input id="txt_username" ng-model="scDetails.username" name="txt_username" type="text" value="phytone" class="input-medium">
+      <input id="txt_username" ng-model="scDetails.username" name="txt_username" type="search" value="phytone" class="input-medium form-control">
 
       </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="control-group">
       <label class="control-label" for="daysOld">Max Days Old</label>
       <div class="controls">
-      <select id="daysOld" name="daysOld" ng-model="scDetails.daysOld" class="input-mini">
+      <select id="daysOld" name="daysOld" ng-model="scDetails.daysOld" class="input form-control">
         <option value="1" selected="selected">1</option>
         <option>3</option>
         <option>5</option>
@@ -33,7 +33,7 @@
     <div class="control-group">
       <label class="control-label" for="tracksPerArtist">Max Tracks Per Artist</label>
       <div class="controls">
-      <select id="tracksPerArtist" name="tracksPerArtist" ng-model="scDetails.tracksPerArtist" class="input-mini">
+      <select id="tracksPerArtist" name="tracksPerArtist" ng-model="scDetails.tracksPerArtist" class="input form-control">
         <option value="1" selected="selected">1</option>
         <option>2</option>
         <option>3</option>
@@ -54,22 +54,27 @@
     </fieldset>
   </form>
 </div>
-<p>{{loading}}</p>
 <ul class="row" ng-if="tracks.length" ng-model="tracks">
     <li class="col-xs-6 animate-repeat" ng-repeat="track in tracks">
       <div class="media well">
         <a class="pull-left" href="#">
           <img class="media-object" src="{{track.artwork_url}}" alt="">
         </a>
-        <div class="media-body">{{loading}}
+        <div class="media-body">
           <h4 class="media-heading">{{track.title | limitTo:30}}</h4>
           <p class="description">{{track.description | limitTo:100}}</p>
           <p ng-show="{{track.downloadable}}">
             <span class="glyphicon glyphicon-download"></span>
-            <a href="{{track.id}}" target="_blank" > Download Available</a>
+            <a href="{{track.permalink_url}}" target="_blank" > Download Available</a>
           </p>
         </div>
-        <scembed src="{{track.src}}"></scembed>
+        <iframe iframe-load="onLoad()"
+                src="{{track.src}}"
+                width="100%"
+                height="20"
+                scrolling="no"
+                frameborder="no">
+        </iframe>
       </div>
     </li>
 

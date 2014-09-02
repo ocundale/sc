@@ -15,7 +15,11 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
+.sc-params {
+  width: 240px;
+  margin:auto;
+  margin-bottom:50px;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -75,7 +79,7 @@ legend {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
-
+  min-width:680px;
   }
 
   /* Remove the padding we set earlier */
@@ -95,6 +99,7 @@ legend {
   }
 }
 .media {
+  min-height: 200px;
   .media-heading {
     font-size: 14px;
   }
