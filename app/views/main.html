@@ -1,84 +1,117 @@
-<div class="row details">
-  <form class="form-horizontal sc-params" form ng-submit="search()">
-    <fieldset>
-    <!-- Form Name -->
-    <!-- <legend>Details: </legend> -->
+<div class="details">
 
-    <!-- Text input-->
-    <div class="control-group">
-      <label class="control-label" for="txt_username">SoundCloud Username</label>
-      <div class="controls">
-      <input id="txt_username" ng-model="scDetails.username" name="txt_username" type="search" value="phytone" class="input-medium form-control">
+  <div class="panel-group" id="accordion">
 
+    <div class="panel panel-default row">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#searchPanel" class="">
+            Search panel
+          </a>
+        </h4>
       </div>
-    </div>
+      <div id="searchPanel" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <form class="form-horizontal sc-params">
+            <fieldset>
+            <!-- Search Form -->
+            <!-- <legend>Details: </legend> -->
 
-    <!-- Select Basic -->
-    <div class="control-group">
-      <label class="control-label" for="daysOld">Max Days Old</label>
-      <div class="controls">
-      <select id="daysOld" name="daysOld" ng-model="scDetails.daysOld" class="input form-control">
-        <option value="1" selected="selected">1</option>
-        <option>3</option>
-        <option>5</option>
-        <option>7</option>
-        <option>10</option>
-        <option>14</option>
-        <option>28</option>
-      </select>
-      </div>
-    </div>
+            <!-- Text input-->
+            <div class="control-group">
+              <label class="control-label" for="txt_username">SoundCloud Username</label>
+              <div class="controls">
+                <input id="txt_username" ng-model="scDetails.username" ng-minlength="5" name="txt_username" type="search" value="phytone" class="input-medium form-control" required>
+              </div>
+            </div>
 
-    <!-- Select Basic -->
-    <div class="control-group">
-      <label class="control-label" for="tracksPerArtist">Max Tracks Per Artist</label>
-      <div class="controls">
-      <select id="tracksPerArtist" name="tracksPerArtist" ng-model="scDetails.tracksPerArtist" class="input form-control">
-        <option value="1" selected="selected">1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-      </div>
-    </div>
+            <!-- Select Basic -->
+            <div class="control-group">
+              <label class="control-label" for="daysOld">Max Days Old</label>
+              <div class="controls">
+              <select id="daysOld" name="daysOld" ng-model="scDetails.daysOld" class="input form-control">
+                <option value="1" selected="selected">1</option>
+                <option>3</option>
+                <option>5</option>
+                <option>7</option>
+                <option>10</option>
+                <option>14</option>
+                <option>28</option>
+              </select>
+              </div>
+            </div>
 
-    <!-- Button -->
-    <div class="control-group">
-      <label class="control-label" for="complete"></label>
-      <div class="controls">
-      <button ng-model="scDetails" id="complete" name="complete" class="btn btn-primary" ng-click="search(scDetails)" type="button">Get me the FRESH S#IT!</button>
-      </div>
-    </div>
+            <!-- Select Basic -->
+            <div class="control-group">
+              <label class="control-label" for="tracksPerArtist">Max Tracks Per Artist</label>
+              <div class="controls">
+              <select id="tracksPerArtist" name="tracksPerArtist" ng-model="scDetails.tracksPerArtist" class="input form-control">
+                <option value="1" selected="selected">1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              </div>
+            </div>
 
-    </fieldset>
-  </form>
-</div>
-<ul class="row" ng-if="tracks.length" ng-model="tracks">
-    <li class="col-xs-6 animate-repeat" ng-repeat="track in tracks">
-      <div class="media well">
-        <a class="pull-left" href="#">
-          <img class="media-object" src="{{track.artwork_url}}" alt="">
-        </a>
-        <div class="media-body">
-          <h4 class="media-heading">{{track.title | limitTo:30}}</h4>
-          <p class="description">{{track.description | limitTo:100}}</p>
-          <p ng-show="{{track.downloadable}}">
-            <span class="glyphicon glyphicon-download"></span>
-            <a href="{{track.permalink_url}}" target="_blank" > Download Available</a>
-          </p>
+            <!-- Button -->
+            <div class="control-group">
+              <label class="control-label" for="complete"></label>
+              <div class="controls">
+              <button ng-model="scDetails" id="complete" name="complete" class="btn btn-primary" ng-click="search(scDetails)" type="button" ng-disabled="sc-params.$invalid">Get me the FRESH S#IT!</button>
+              </div>
+            </div>
+            </fieldset>
+          </form>
         </div>
-        <iframe iframe-load="onLoad()"
-                src="{{track.src}}"
-                width="100%"
-                height="20"
-                scrolling="no"
-                frameborder="no">
-        </iframe>
       </div>
-    </li>
+    </div>
 
-     <li class="animate-repeat" ng-if="tracks.length == 0" ng-hide="json">
-       <strong>No tracks found...</strong>
-     </li>
-</ul>
+    <div class="panel panel-default row">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#resultsPanel" class="">
+            Results
+          </a>
+        </h4>
+      </div>
+      <div id="resultsPanel" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <ul ng-show="tracks.length" ng-model="tracks">
+              <li class="col-xs-6 animated fadeInDown" ng-repeat="track in tracks">
+              <div class="panel panel-default">
+                <div class="panel-body media">
+                  <a class="pull-left" href="#">
+                    <img class="media-object" src="{{track.artwork_url}}" alt="">
+                  </a>
+                  <div class="media-body">
+                    <h4 class="media-heading">{{track.title | limitTo:30}}</h4>
+                    <p class="description">{{track.description | limitTo:100}}</p>
+                    <p ng-show="{{track.downloadable}}">
+                      <span class="glyphicon glyphicon-download"></span>
+                      <a href="{{track.permalink_url}}" target="_blank" > Download Available</a>
+                    </p>
+                  </div>
+                </div>
+                <div class="panel-footer">
+                  <iframe iframe-load="onLoad()"
+                          src="{{track.src}}"
+                          width="100%"
+                          height="20"
+                          scrolling="no"
+                          frameborder="no">
+                  </iframe>
+                </div>
+              </div>
+              </li>
+
+               <li class="animate-repeat" ng-if="tracks.length == 0" ng-hide="json">
+                 <strong>No tracks found...</strong>
+               </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

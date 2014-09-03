@@ -1,6 +1,8 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "../app/styles/cosmo_vars.scss";
+@import "../app/styles/cosmo_bootswatch.scss";
 // endbower
 
 .browsehappy {
@@ -17,7 +19,6 @@ body {
 }
 .sc-params {
   width: 240px;
-  margin:auto;
   margin-bottom:50px;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -27,7 +28,10 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
-
+li.animated {
+  list-style:none;
+  margin-bottom:20px;
+}
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
@@ -40,6 +44,86 @@ body {
     padding-bottom: 19px;
   }
 }
+.animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:0.8s;-moz-animation-duration:0.8s;-ms-animation-duration:0.8s;-o-animation-duration:0.8s;animation-duration:0.8s;}.animated.hinge{-webkit-animation-duration:0.8s;-moz-animation-duration:0.8s;-ms-animation-duration:0.8s;-o-animation-duration:0.8s;animation-duration:0.8s;}@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}  100% {opacity: 1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  -moz-animation-name: fadeIn;
+  -o-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-moz-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -moz-transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: translateY(0);
+  }
+}
+
+@-o-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -o-transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -o-transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  -o-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
 
 /* Custom page footer */
 .footer {
@@ -99,7 +183,6 @@ legend {
   }
 }
 .media {
-  min-height: 200px;
   .media-heading {
     font-size: 14px;
   }
